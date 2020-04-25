@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "page": {
+      "type": "number"
+    },
+    "per_page": {
+      "type": "number"
+    },
+    "total": {
+      "type": "number"
+    },
+    "total_pages": {
+      "type": "number"
+    },
+    "data": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "items": {
+        "required": [
+          "id",
+          "name",
+          "year",
+          "color",
+          "pantone_value"
+        ],
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "year": {
+            "type": "number"
+          },
+          "color": {
+            "type": "string",
+            "minLength": 1
+          },
+          "pantone_value": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "ad": {
+      "type": "object",
+      "properties": {
+        "company": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "company",
+        "url",
+        "text"
+      ]
+    }
+  },
+  "required": [
+    "page",
+    "per_page",
+    "total",
+    "total_pages",
+    "data",
+    "ad"
+  ]
+}

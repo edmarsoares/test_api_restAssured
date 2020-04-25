@@ -31,7 +31,6 @@ public class ReqResExample {
 	}
 	@Test
 	public void methodGet() {
-//		PessoaResponse as =
 				given()
 		.when()
 			.get(Servicos.getUsers_ID.getValor(), 2)
@@ -40,9 +39,6 @@ public class ReqResExample {
 			.and()
 			.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("Schemas/thiagoExample.json"))
 			.log().all();
-//			.and().extract().response().as(PessoaResponse.class);
-		
-		
 	}
 	@Test
 	public void methodPost() {
@@ -172,7 +168,7 @@ public class ReqResExample {
 	
 	@Test
 	public void methodGetListUsers() {
-		int statusCode = given()
+		int size = given()
 			.when()
 				.get(Servicos.getUsers_PAGE.getValor(), 2)
 			.then().contentType(ContentType.JSON)
@@ -180,9 +176,26 @@ public class ReqResExample {
 				.and()
 				.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("Schemas/listUserPage.json"))
 				.log().all()
-			.and().extract().response().getStatusCode();
+			.and().extract().response().jsonPath().getList("data.id").size();
 		
-		assertEquals(200, statusCode);	
+		assertEquals(6, size);
+		
+	}
+	
+	@Test
+	public void methodGetListResources() {
+		int size = given()
+			.when()
+				.get(Servicos.getResource.getValor())
+			.then().contentType(ContentType.JSON)
+				.statusCode(HttpStatus.SC_OK)
+				.and()
+				.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("Schemas/resourceList.json"))
+				.log().all()
+			.and().extract().response().jsonPath().getList("data.id").size();
+		
+		assertEquals(6, size);
+		
 	}
 	
 	@Test

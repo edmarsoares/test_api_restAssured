@@ -2,7 +2,8 @@ package br.com.thiago.servicos;
 
 public enum Servicos {
 	getUsers_ID ("/api/users/{id}"),
-	getUsers_PAGE ("/api/users?page={id}");
+	getUsers_PAGE ("/api/users?page={id}"),
+	getResource("api/unknown");
 	
 	private final String valor;
 	
